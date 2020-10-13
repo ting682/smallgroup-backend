@@ -1,5 +1,8 @@
 class Topic < ApplicationRecord
     belongs_to :user
+
+    has_many :comments
+    has_many :users
     has_many :topic_passages
     has_many :passages, :through => :topic_passages
 

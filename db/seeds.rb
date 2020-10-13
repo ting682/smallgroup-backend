@@ -26,3 +26,5 @@ new_topic.passages << new_passage2
 new_topic.passages << new_passage3
 new_topic2.passages << new_passage
 new_topic2.passages << new_passage3
+
+comment1 = Comment.create(content: 'I like humility as a topic', user_id: u.id, topic_id: new_topic.id)
