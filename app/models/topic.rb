@@ -6,4 +6,8 @@ class Topic < ApplicationRecord
     has_many :topic_passages
     has_many :passages, :through => :topic_passages
 
+
+    def localTime
+        return self.updated_at.localtime.strftime("%B %e, %Y %l:%M%p")
+    end
 end

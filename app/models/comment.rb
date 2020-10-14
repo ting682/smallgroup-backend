@@ -16,6 +16,6 @@ class Comment < ApplicationRecord
     end
 
     def localTime
-        return self.updated_at.localtime.strftime("Posted on %B %e, %Y %l:%M%p")
+        return self.updated_at.localtime.strftime("%B %e, %Y %l:%M%p")
     end
 end
