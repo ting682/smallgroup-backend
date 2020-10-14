@@ -4,19 +4,19 @@ class Api::V1::PassagesController < ApplicationController
         user = User.find(params[:user_id])
         passages = user.passages
 
-        render :json => passages
+        render :json => PassageSerializer.new(passages)
     end
 
     def show
         passage = Passage.find([:id])
-        render :json => passage
+        render :json => PassageSerializer.new(passage)
     end
 
     def create
         passage = Passage.new(passage_params)
         if passage.valid?
             passage.save
-            render :json => passage, status: :accepted
+            render :json => PassageSerializer.new(passage), status: :accepted
         else
             #error message
             render :json => {errors: passage.errors.full_messages}, status: :unprocessible_entity
@@ -26,7 +26,7 @@ class Api::V1::PassagesController < ApplicationController
     def update
         passage = Passage.find(params[:id])
         if passage.update(passage_params)
-            render :json => passage, status: :accepted
+            render :json => PassageSerializer.new(passage), status: :accepted
         else
             render :json => {errors: passage.errors.full_messages}, status: :unprocessible_entity
         end
@@ -35,7 +35,7 @@ class Api::V1::PassagesController < ApplicationController
     def destroy
         passage = Passage.find(params[:id])
         if passage.destroy
-            render :json => Passage.all, status: :accepted
+            render :json => PassageSerializer.new(Passage.all), status: :accepted
         else 
             render :json => {errors: passage.errors.full_messages}, status: :unprocessible_entity
         end
