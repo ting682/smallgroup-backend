@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::API
     
+    include ::ActionController::Cookies
+
     def logged_in?
         if session[:user_id]
             true
