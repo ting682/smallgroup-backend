@@ -1,2 +1,0 @@
-class PassagesController < ApplicationController
-end
