@@ -4,7 +4,7 @@ class Api::V1::TopicsController < ApplicationController
         user = User.find(params[:user_id])
         topics = user.topics
         options = {
-            include: [:passages, :'comments']
+            include: [:passages, :comments]
         }
         render :json => TopicSerializer.new(topics, options)
     end
