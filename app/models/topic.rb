@@ -10,4 +10,8 @@ class Topic < ApplicationRecord
     def localTime
         return self.updated_at.localtime.strftime("%B %e, %Y %l:%M%p")
     end
+
+    def name
+        return self.user.name
+    end
 end

@@ -2,7 +2,8 @@ class Api::V1::PassagesController < ApplicationController
 
     def index
         user = User.find(params[:user_id])
-        passages = user.passages
+        topic = Topic.find(params[:topic_id])
+        passages = topic.passages
 
         render :json => PassageSerializer.new(passages)
     end

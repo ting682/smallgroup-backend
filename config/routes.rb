@@ -5,9 +5,10 @@ Rails.application.routes.draw do
     namespace :v1 do
 
       resources :users, only: [:show] do
-        resources :passages
+        
         resources :topics do
           resources :comments
+          resources :passages
         end
       end
 

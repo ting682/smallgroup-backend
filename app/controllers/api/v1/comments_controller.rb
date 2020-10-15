@@ -4,7 +4,7 @@ class Api::V1::CommentsController < ApplicationController
         
         topic = Topic.find(params[:topic_id])
         comments = topic.comments
-        render json: comments
+        render json: CommentSerializer.new(comments)
     end
 
     def show
