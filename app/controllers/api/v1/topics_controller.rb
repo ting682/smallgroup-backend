@@ -23,7 +23,9 @@ class Api::V1::TopicsController < ApplicationController
     end
 
     def create
+        
         topic = Topic.new(topic_params)
+        #binding.pry
         if topic.valid?
             topic.save
             render :json => TopicSerializer.new(topic), status: :accepted
@@ -55,6 +57,6 @@ class Api::V1::TopicsController < ApplicationController
     private
 
     def topic_params
-        params.require(:topic).permit(:content, :title, :user_id)
+        params.require(:topic).permit!
     end
 end

@@ -1,3 +1,5 @@
+require 'pry'
+
 class Api::V1::CommentsController < ApplicationController
 
     def index
@@ -12,8 +14,15 @@ class Api::V1::CommentsController < ApplicationController
         render json: comment
     end
 
+    def new
+        render format.html
+    end
+
     def create
+        #binding.pry
+        #binding.pry
         comment = Comment.new(comment_params)
+        
         if comment.valid?
             comment.save
             render :json => comment, status: :accepted
@@ -44,6 +53,7 @@ class Api::V1::CommentsController < ApplicationController
     private
 
     def comment_params
-        params.require(:comment).permit(:content, :user_id, :topic_id)
+        
+        params.require(:comment).permit(:topic_id, :content, :user_id)
     end 
 end
