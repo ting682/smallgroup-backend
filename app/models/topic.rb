@@ -19,8 +19,28 @@ class Topic < ApplicationRecord
         
 
         attributes_array.each do |attribute|
-            passage = self.passages.build(attribute)
-            binding.pry
+            
+            #binding.pry
+            if attribute['passage_id']
+                passage = Passage.find(attribute['passage_id'])
+                #binding.pry
+                passage.content = attribute['content']
+                passage.book = attribute['book']
+                passage.chapter = attribute['chapter']
+                passage.verse = attribute['verse']
+
+                if passage.valid?
+                    passage.save
+                end
+
+                
+            else
+                passage = self.passages.build(attribute)
+
+            end
+            #binding.pry
+            #
+            # binding.pry
             #passage.save
         end
     end

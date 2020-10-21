@@ -37,7 +37,9 @@ class Api::V1::TopicsController < ApplicationController
 
     def update
         topic = Topic.find(params[:id])
+        
         if topic.update(topic_params)
+            
             render :json => TopicSerializer.new(topic), status: :accepted
         else
             render :json => {errors: topic.errors.full_messages}, status: :unprocessible_entity
@@ -45,6 +47,7 @@ class Api::V1::TopicsController < ApplicationController
     end
 
     def destroy
+        #binding.pry
         topic = Topic.find(params[:id])
         topics = Topic.all
         if topic.destroy

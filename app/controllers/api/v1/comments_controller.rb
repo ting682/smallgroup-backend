@@ -25,7 +25,7 @@ class Api::V1::CommentsController < ApplicationController
         
         if comment.valid?
             comment.save
-            render :json => comment, status: :accepted
+            render :json => CommentSerializer.new(comment), status: :accepted
         else
             #error message
             render :json => {errors: comment.errors.full_messages}, status: :unprocessible_entity
