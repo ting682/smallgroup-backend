@@ -6,10 +6,12 @@ Rails.application.routes.draw do
 
       resources :users, only: [:show] do
         
-        resources :topics do
-          resources :comments
-          resources :passages
-        end
+        
+      end
+
+      resources :topics do
+        resources :comments
+        resources :passages
       end
 
       get '/signup', to: "users#new"

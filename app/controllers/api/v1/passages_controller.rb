@@ -1,7 +1,7 @@
 class Api::V1::PassagesController < ApplicationController
 
     def index
-        user = User.find(params[:user_id])
+        
         topic = Topic.find(params[:topic_id])
         passages = topic.passages
 

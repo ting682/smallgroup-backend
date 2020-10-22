@@ -1,13 +1,17 @@
 class Api::V1::UsersController < ApplicationController
 
+    skip_before_action :authorized, only: [:create]
+
     def create
+        #binding.pry
         @user = User.new(user_params)
     
         if @user.save
-           render :json => UserSerializer.new(@user), status: :accepted
+            @token = encode_token(user_id: @user.id)
+           render :json => {UserSerializer.new(@user), jwt: @token}, status: :created
         else
 
-            flash[:error] = @user.errors.full_messages.to_sentence
+            render :json => {error: @user.errors.full_messages.to_sentence}
         end
     end
 
