@@ -6,9 +6,11 @@ class Topic < ApplicationRecord
     has_many :topic_passages
     has_many :passages, :through => :topic_passages
 
+    include ActionView::Helpers::DateHelper
 
     def localTime
-        return self.updated_at.localtime.strftime("%B %e, %Y %l:%M%p")
+        return time_ago_in_words(self.updated_at) + " ago"
+        #return self.updated_at.localtime.strftime("%B %e, %Y %l:%M%p")
     end
 
     def name

@@ -1,5 +1,7 @@
 class Comment < ApplicationRecord
 
+    include ActionView::Helpers::DateHelper
+
     belongs_to :user
     belongs_to :topic
 
@@ -16,6 +18,7 @@ class Comment < ApplicationRecord
     end
 
     def localTime
-        return self.updated_at.localtime.strftime("%B %e, %Y %l:%M%p")
+        return "posted " + time_ago_in_words(self.updated_at) + " ago"
+        #return self.updated_at.localtime.strftime("%B %e, %Y %l:%M%p")
     end
 end

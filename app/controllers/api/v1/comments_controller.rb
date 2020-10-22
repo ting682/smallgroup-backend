@@ -5,7 +5,7 @@ class Api::V1::CommentsController < ApplicationController
     def index
         
         topic = Topic.find(params[:topic_id])
-        comments = topic.comments
+        comments = topic.comments.order(updated_at: :desc)
         render json: CommentSerializer.new(comments)
     end
 
@@ -42,6 +42,8 @@ class Api::V1::CommentsController < ApplicationController
     end
 
     def destroy
+
+        
         comment = Comment.find(params[:id])
         if comment.destroy
             render :json => Comment.all, status: :accepted

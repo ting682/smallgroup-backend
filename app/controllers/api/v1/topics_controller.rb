@@ -48,8 +48,9 @@ class Api::V1::TopicsController < ApplicationController
     def destroy
         #binding.pry
         topic = Topic.find(params[:id])
-        topics = Topic.all
-        if topic.destroy
+        
+
+        if current_user.id == topic.user.id && topic.destroy
             render :json => TopicSerializer.new(topics), status: :accepted
         else 
             render :json => {errors: topic.errors.full_messages}, status: :unprocessible_entity
