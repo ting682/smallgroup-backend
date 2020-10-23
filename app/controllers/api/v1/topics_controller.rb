@@ -2,7 +2,8 @@ class Api::V1::TopicsController < ApplicationController
 
     def index
         #user = User.find(params[:user_id])
-        topics = Topic.all
+        topics = Topic.all.order(updated_at: :asc)
+
         options = {
             include: [:passages, :comments]
         }
@@ -35,13 +36,16 @@ class Api::V1::TopicsController < ApplicationController
     end
 
     def update
-        topic = Topic.find(params[:id])
         
-        if topic.update(topic_params)
+        topic = Topic.find(params[:id])
+        #binding.pry
+        if topic.user == current_user && topic.update(topic_params)
             
             render :json => TopicSerializer.new(topic), status: :accepted
         else
-            render :json => {errors: topic.errors.full_messages}, status: :unprocessible_entity
+            #binding.pry
+            render :json => {errors: 'Invalid update', status: :unprocessible_entity}
+            
         end
     end
 
@@ -50,10 +54,10 @@ class Api::V1::TopicsController < ApplicationController
         topic = Topic.find(params[:id])
         
 
-        if current_user.id == topic.user.id && topic.destroy
-            render :json => TopicSerializer.new(topics), status: :accepted
+        if current_user == topic.user && topic.destroy
+            render :json => TopicSerializer.new(topic), status: :accepted
         else 
-            render :json => {errors: topic.errors.full_messages}, status: :unprocessible_entity
+            render :json => {errors: 'Invalid deletion', status: :unprocessible_entity }
         end
     end
 

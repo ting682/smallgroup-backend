@@ -8,7 +8,8 @@ class Api::V1::UsersController < ApplicationController
     
         if @user.save
             @token = encode_token(user_id: @user.id)
-           render :json => {UserSerializer.new(@user), jwt: @token}, status: :created
+            #binding.pry
+            render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
         else
 
             render :json => {error: @user.errors.full_messages.to_sentence}

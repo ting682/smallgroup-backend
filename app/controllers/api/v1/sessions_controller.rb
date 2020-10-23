@@ -22,6 +22,10 @@ class Api::V1::SessionsController < ApplicationController
         end
     end
 
+    def destroy
+        
+    end
+
     def user_login_params
         # params { user: {username: 'Chandler Bing', password: 'hi' } }
         params.require(:user).permit(:email_address, :password)
