@@ -1,5 +1,7 @@
 class Api::V1::PassagesController < ApplicationController
 
+    skip_before_action :authorized, only: [:index]
+
     def index
         
         topic = Topic.find(params[:topic_id])

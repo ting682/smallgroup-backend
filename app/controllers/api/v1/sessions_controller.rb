@@ -16,14 +16,14 @@ class Api::V1::SessionsController < ApplicationController
             render json: { user: UserSerializer.new(@user), jwt: token }, status: :accepted
         else
             render json: {
-                error: "Login error: email and password do not match records."
-            }, status: :unauthorized
+                error: "Login error: email and password do not match records.",
+                status: :unauthorized }
             
         end
     end
 
     def destroy
-        
+
     end
 
     def user_login_params

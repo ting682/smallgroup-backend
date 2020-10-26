@@ -1,5 +1,7 @@
 class Api::V1::TopicsController < ApplicationController
 
+    skip_before_action :authorized, only: [:index]
+
     def index
         #user = User.find(params[:user_id])
         topics = Topic.all.order(updated_at: :asc)
