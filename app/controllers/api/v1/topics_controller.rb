@@ -42,7 +42,7 @@ class Api::V1::TopicsController < ApplicationController
         topic = Topic.find(params[:id])
         #binding.pry
         if topic.user == current_user && topic.update(topic_params)
-            
+            #binding.pry
             render :json => TopicSerializer.new(topic), status: :accepted
         else
             #binding.pry
