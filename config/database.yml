@@ -79,7 +79,12 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: smallgroup_backend_production
-  username: smallgroup_backend
-  password: <%= ENV['SMALLGROUP_BACKEND_DATABASE_PASSWORD'] %>
+  # <<: *default
+  # database: smallgroup_backend_production
+  # username: smallgroup_backend
+  # password: <%= ENV['SMALLGROUP_BACKEND_DATABASE_PASSWORD'] %>
+
+    adapter: postgresql
+    host: localhost
+    username: user
+    database: app-dev
