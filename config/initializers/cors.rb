@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://smallgroups.netlify.app'
+    origins 'https://smallgroups.netlify.app/'
     # origins 'https://ting682.github.io/smallgroup-frontend/'
 
 
